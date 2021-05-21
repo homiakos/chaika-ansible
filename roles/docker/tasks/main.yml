@@ -1,0 +1,20 @@
+---
+- include_tasks: docker.yml
+  tags:
+    - docker
+
+- include_tasks: docker-network.yml
+  tags:
+    - docker
+    - docker_network
+
+- include_tasks: docker-compose.yml
+  when: docker_install_compose | bool
+  tags:
+    - docker
+    - docker-compose
+
+- include_tasks: docker-users.yml
+  when: docker_users | length > 0
+  tags:
+    - docker

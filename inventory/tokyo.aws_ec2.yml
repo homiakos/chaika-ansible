@@ -1,0 +1,21 @@
+#https://docs.ansible.com/ansible/latest/plugins/inventory.html
+plugin: amazon.aws.aws_ec2
+# The values for profile, access key, secret key and token can be hardcoded like:
+boto_profile: chaika
+# or you could use Jinja as:
+# boto_profile: "{{ lookup('env', 'AWS_PROFILE') | default('aws_profile', true) }}"
+# Populate inventory with instances in these regions
+regions:
+  - ap-northeast-1
+
+keyed_groups:
+  # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
+  - key: tags.Name
+    prefix: tag_Name_
+    separator: ""
+  - key: tags.ENV
+    prefix: tag_ENV_
+    separator: ""
+  - key: tags.Product
+    prefix: tag_Product_
+    separator: ""

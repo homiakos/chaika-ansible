@@ -1,0 +1,9 @@
+---
+    
+- hosts: tag_Product_waves
+#  gather_facts: no
+  become: yes
+  become_method: sudo
+  roles:
+     - docker
+
