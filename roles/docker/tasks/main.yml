@@ -1,5 +1,11 @@
 ---
-- include_tasks: docker.yml
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+  tags:
+    - docker
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
   tags:
     - docker
 
@@ -8,11 +14,11 @@
     - docker
     - docker_network
 
-- include_tasks: docker-compose.yml
-  when: docker_install_compose | bool
-  tags:
-    - docker
-    - docker-compose
+#- include_tasks: docker-compose.yml
+#  when: docker_install_compose | bool
+#  tags:
+#    - docker
+#    - docker-compose
 
 - include_tasks: docker-users.yml
   when: docker_users | length > 0

@@ -1,0 +1,31 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    name:
+      - python3-pip
+      - vim
+      - git
+    update_cache: yes
+    state: present
+  tags:
+    - connect-test
+
+- name: add private_key
+  copy:
+    src: "{{ role_path }}/files/git_private.key"
+    dest: /root/.ssh/id_rsa
+    owner: root
+    group: root
+    mode: '0600'
+  tags:
+      - connect-test
+
+- name: add test.py
+  copy:
+    src: "{{ role_path }}/files/test.py"
+    dest: /root/test.py
+    owner: root
+    group: root
+    mode: '0600'
+  tags:
+      - connect-test

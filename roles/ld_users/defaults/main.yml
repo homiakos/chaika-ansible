@@ -1,0 +1,5 @@
+---
+# defaults file for ld_users
+admins:
+             - dkasyanov
+             - nchaika

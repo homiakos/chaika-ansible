@@ -6,7 +6,7 @@ boto_profile: chaika
 # boto_profile: "{{ lookup('env', 'AWS_PROFILE') | default('aws_profile', true) }}"
 # Populate inventory with instances in these regions
 regions:
-  - ap-northeast-1
+  - eu-west-1
 
 keyed_groups:
   # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
@@ -22,16 +22,3 @@ keyed_groups:
   - key: tags.OS
     prefix: tag_OS_
     separator: ""
-
-filters:
-  instance-state-name : running
-
-compose:
-# use if you need to connect via the ec2
-# private ip address. 
-#
-# this is needed for example in a 
-# corporate / company environment where ec2 
-# instances don't use a public ip address
-#
-#  ansible_host: private_ip_address

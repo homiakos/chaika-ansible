@@ -1,0 +1,12 @@
+
+all:
+  vars:
+  hosts:
+    tag_Name_waves02_chaika_local:
+      waves:
+        registry: "wavesplatform"
+        image: "wavesnode"
+        tag: "1.2.21"
+        network: "mainnet"
+        log_level: "DEBUG"
+        heap_size: "2g"

@@ -1,7 +1,9 @@
 - name: Docker Create Net Apps
-  raw: docker network create "{{ item }}"
+  docker_network:
+        name: "{{ item }}"
+#  raw: docker network create "{{ item }}"
   loop: "{{ docker_networks }}"
-  run_once: True
+#  run_once: True
   ignore_errors: yes
   tags:
     - docker

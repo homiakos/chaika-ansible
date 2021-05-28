@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+   image: ${REGISTRY}/${IMAGE}:${TAG}
+   container_name: ${IMAGE}
+   hostname: ${IMAGE}
+   restart: unless-stopped
+   networks:
+         - apps
+   ports:
+       - 6869:6869 # Default  REST API
+       - 6862:6862 # STAGENET
+       - 6863:6863 # CustomNET
+       - 6868:6868 # MainNet
+       - 6870:6870 # Current REST API
+   environment:
+         - WAVES_NETWORK=${WAVES_NETWORK}
+         - WAVES_LOG_LEVEL=${WAVES_LOG_LEVEL}
+         - WAVES_HEAP_SIZE=${WAVES_HEAP_SIZE}
+         - WAVES_VERSION=${TAG}
+         - WAVES_WALLET_SEED=${WAVES_WALLET_SEED}
+         - WAVES_WALLET_PASSWORD=${WAVES_WALLET_PASSWORD}
+         - JAVA_OPTS=${JAVA_OPTS}
+   volumes:
+      -  /docker/waves/waves-config:/etc/waves
+      -  /docker/waves/waves-data:/var/lib/waves
+networks:
+  apps:
+    external:
+      name: apps
+

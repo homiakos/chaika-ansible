@@ -1,0 +1,40 @@
+---
+- name: Create a directory for docker-compose
+  file:
+    path:  '/docker/{{ PROJECT }}'
+    state: directory
+    owner: 143
+    group: 143
+    mode: '0754'
+  tags:
+    - waves
+
+- name: Create a directory for autostart config
+  file:
+    path:  '/docker/{{ PROJECT }}/{{ item }}'
+    state: directory
+    owner: 143
+    group: 143
+    mode: '0755'
+  with_items:
+    - waves-config
+    - waves-data
+  tags:
+    - waves
+
+- name: Copy docker-compose
+  template:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "/docker/{{ PROJECT }}/{{ item }}"
+    mode: '0740'
+    owner: 143
+    group: 143
+    backup: no
+  with_items:
+    - docker-compose.yml
+    - .env
+  tags:
+    - waves
+    - waves.config
+  notify:
+     -  Restart docker-compose

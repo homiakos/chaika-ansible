@@ -1,0 +1,11 @@
+---
+# defaults file for waves
+waves:
+  registry: "wavesplatform"
+  image: "wavesnode"
+  tag: "1.2.21"
+  network: "mainnet"
+  log_level: "DEBUG"
+  heap_size: "2g"
+  java_opts: "-Dwaves.network.declared-address=0.0.0.0:6868 -Dwaves.rest-api.port=6870 -Dwaves.rest-api.bind-address=0.0.0.0 -Dwaves.rest-api.enable=yes -Dwaves.miner.enable=no"
+PROJECT: 'waves'

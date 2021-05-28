@@ -1,0 +1,44 @@
+---
+# tasks file for ld_users
+- name: Add Admins
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    group: wheel
+    groups: wheel #,docker
+    append: yes
+  with_items: '{{ admins }}'
+  when: ansible_facts['os_family'] == "RedHat"
+  tags:
+     - users
+     - ssh-key
+     - ld_users
+     - add-admins
+- name: Add Admins
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    group: sudo
+    groups: sudo #,docker
+    append: yes
+  with_items: '{{ admins }}'
+  when: ansible_facts['os_family'] == "Debian"
+  tags:
+     - users
+     - ssh-key
+     - ld_users
+     - add-admins
+
+- name: Add ssh pub keys for Admins
+  authorized_key:
+     user: "{{ item }}"
+     key: "{{ lookup('file', '{{ role_path }}/files/{{ item }}.pub') }}"
+     manage_dir: True
+  with_items: '{{ admins }}'
+  register: add_identity_key
+  ignore_errors: yes
+  tags:
+     - users
+     - ssh-key
+     - ld_users
+     - add-admins
