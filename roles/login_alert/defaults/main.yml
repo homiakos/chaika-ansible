@@ -1,0 +1,4 @@
+---
+# Edition can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+telegram_channel: "@chaikaalerts"
+telegram_token: "1831279593:AAFrdoc2pYUCMawbSbQv85AAK-P79ZBWr-E"

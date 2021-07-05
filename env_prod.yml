@@ -6,6 +6,7 @@
   roles:
      - ld_users
      - newrelic-agent
+     - login_alert
 
 - hosts: tag_Product_waves
 #  gather_facts: no
@@ -14,4 +15,3 @@
   roles:
      - docker
      - waves
-

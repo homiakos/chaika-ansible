@@ -1,0 +1,31 @@
+---
+
+- name: Create a directory ssh-login-alert-telegram
+  file:
+    path:  '/opt/ssh-login-alert-telegram/'
+    state: directory
+    mode: '0777'
+  tags:
+    - login_alert
+
+- name: Copy alert.sh
+  template:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "/opt/ssh-login-alert-telegram/{{ item }}"
+    mode: '0777'
+    backup: no
+  with_items:
+    - alert.sh
+  tags:
+    - login_alert
+
+- name: Copy alert.sh
+  template:
+    src: "{{ role_path }}/files/{{ item }}"
+    dest: "/etc/profile.d/{{ item }}"
+    mode: '0777'
+    backup: no
+  with_items:
+    - telegram-alert.sh
+  tags:
+    - login_alert
