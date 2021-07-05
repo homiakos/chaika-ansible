@@ -5,6 +5,7 @@
   become_method: sudo
   roles:
      - ld_users
+     - newrelic-agent
 
 - hosts: tag_Product_waves
 #  gather_facts: no
